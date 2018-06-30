@@ -16,6 +16,14 @@ public interface IMobile extends IPawn, IElement {
 	
 	void sameDirection();
 	
+	void doNothing();
+    
+    Boolean isFacingLightWall1();
+    
+    Boolean isFacingLightWall2();
+    
+	Boolean Win();
+	
     /**
      * Gets the x.
      *

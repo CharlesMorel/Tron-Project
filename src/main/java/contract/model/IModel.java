@@ -8,4 +8,8 @@ public interface IModel {
 	
 	IMobile getPlayer2();
 	
+	IMobile getLightWall1();
+	
+	IMobile getLightWall2();
+	
 }

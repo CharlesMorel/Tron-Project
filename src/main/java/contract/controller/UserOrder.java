@@ -11,6 +11,9 @@ public enum UserOrder {
 	UP,
 	
 	
-	DOWN
+	DOWN,
+	
+	
+	NOP
 
 }
