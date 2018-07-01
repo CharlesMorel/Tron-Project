@@ -10,7 +10,7 @@ public interface IElement extends ISquare {
 	
 	Permeability getPermeability();
 	
-	@Override
+	//@Override
 	Image getImage();
 
 }

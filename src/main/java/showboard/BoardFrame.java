@@ -57,7 +57,7 @@ public class BoardFrame extends JFrame implements IBoard {
     
     @Override
     public final Observer getObserver() {
-        return this.getBoardPanel();
+        return (Observer) this.getBoardPanel();
     }
 
     

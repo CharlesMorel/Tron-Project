@@ -15,7 +15,7 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JPanel;
 
-public class BoardPanel {
+public class BoardPanel extends JPanel implements Observer {
 	
 	private static final long serialVersionUID = -1561359738513452134L;
 	

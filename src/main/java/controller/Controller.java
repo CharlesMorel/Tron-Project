@@ -30,16 +30,16 @@ public class Controller implements IController, IOrderPerformer {
     }
     
 	
-	@Override
+    //@Override
 	public void play() throws InterruptedException {
 		
-		getModel().getPlayer1().alive();
-		getModel().getPlayer2().alive();
+		getModel().getPlayer1().player1Alive();
+		getModel().getPlayer2().player2Alive();
 		
-		while (!this.getModel().getPlayer1().Win() || !this.getModel().getPlayer2().Win()) {
+		while (!this.getModel().getPlayer1().player1Win() || !this.getModel().getPlayer2().player2Win()) {
 			Thread.sleep(speed);
 			// TODO : DO THIS METHOD BEFORE CONTINUE THE REST OF THE CONTROLLER CLASS
-			if(this.getModel().getPlayer1().isAlive()) {
+			if(this.getModel().getPlayer1().player1IsAlive()) {
 				switch(this.getStackOrder()) {
 					case RIGHT:
 						this.getModel().getPlayer1().moveRight();
@@ -63,7 +63,7 @@ public class Controller implements IController, IOrderPerformer {
 				this.clearStackOrder();
 			}
 			
-			if(this.getModel().getPlayer2().isAlive()) {
+			if(this.getModel().getPlayer2().player2IsAlive()) {
 				switch(this.getStackOrder()) {
 				case RIGHT:
 					this.getModel().getPlayer2().moveRight();
@@ -89,50 +89,48 @@ public class Controller implements IController, IOrderPerformer {
 			
 		}
 		
-		if(!getModel().getPlayer1().isAlive()) {
+		if(!getModel().getPlayer1().player1IsAlive()) {
 			this.getView().displayMessage("Player 1 is dead... Victory for player 2!");
 		}
 		
-		if(!getModel().getPlayer2().isAlive() && getModel().getPlayer1().isAlive()) {
+		if(!getModel().getPlayer2().player2IsAlive() && getModel().getPlayer1().player1IsAlive()) {
 			this.getView().displayMessage("Player 2 is dead... Victory for player1!");
 		}
 		
 	}
 	
-	public Boolean isFacingLightWall1() {
-		return getModel().getPlayer2().getX() == getModel().getPlayer1().getX() 
-			&& getModel().getPlayer2().getY() == getModel().getPlayer1().getY();
-		
+	public Boolean player1IsFacingLightWall() {
+		return getModel().getPlayer1().getX() == getModel().getLightWall1().getX() && getModel().getPlayer1().getY() == getModel().getLightWall1().getY()
+			|| getModel().getPlayer1().getX() == getModel().getLightWall2().getX() && getModel().getPlayer1().getY() == getModel().getLightWall2().getY();
 	}
 	
-	public Boolean isFacingLightWall2() {
-		return getModel().getPlayer1().getX() == getModel().getPlayer2().getX() 
-				&& getModel().getPlayer1().getY() == getModel().getPlayer2().getY();
-			
+	public Boolean player2IsFacingLightWall() {
+		return getModel().getPlayer2().getX() == getModel().getLightWall1().getX() && getModel().getPlayer2().getY() == getModel().getLightWall1().getY()
+			|| getModel().getPlayer2().getX() == getModel().getLightWall2().getX() && getModel().getPlayer2().getY() == getModel().getLightWall2().getY();
 	}
 	
 	public void playerIsFacingSomething() {
-		if(this.isFacingLightWall1()) {
-			this.getModel().getPlayer2().die();
+		if(this.player2IsFacingLightWall()) {
+			this.getModel().getPlayer2().player2Die();
 		}
-		if(this.isFacingLightWall2()) {
-			this.getModel().getPlayer1().die();
+		if(this.player1IsFacingLightWall()) {
+			this.getModel().getPlayer1().player1Die();
 		}
 	}
 
-	@Override
+	//@Override
 	public IOrderPerformer getOrderPeformer() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	//@Override
 	public IModel getModel() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+	//@Override
 	public void orderPerform(UserOrder userOrder) throws IOException {
 		// TODO Auto-generated method stub
 		

@@ -18,18 +18,22 @@ public interface IMobile extends IPawn, IElement {
 	
 	void doNothing();
     
-    Boolean isFacingLightWall1();
+    Boolean player1IsFacingLightWall();
     
-    Boolean isFacingLightWall2();
+    Boolean player2IsFacingLightWall();
     
-	Boolean Win();
+    void playerIsFacingSomething();
+    
+	Boolean player1Win();
+	
+	Boolean player2Win();
 	
     /**
      * Gets the x.
      *
      * @return the x
      */
-    @Override
+	//@Override
     int getX();
 
     /**
@@ -37,7 +41,7 @@ public interface IMobile extends IPawn, IElement {
      *
      * @return the y
      */
-    @Override
+    //@Override
     int getY();
     
     /**
@@ -45,7 +49,9 @@ public interface IMobile extends IPawn, IElement {
      *
      * @return the alive
      */
-    Boolean isAlive();
+    Boolean player1IsAlive();
+    
+    Boolean player2IsAlive();
     
     /**
      * Checks if the car crashed.
@@ -56,7 +62,9 @@ public interface IMobile extends IPawn, IElement {
     
     Point getPosition();
     
-    void alive();
+    void player1Alive();
+    
+    void player2Alive();
     
 	void setY(final int y);
 	
@@ -72,9 +80,8 @@ public interface IMobile extends IPawn, IElement {
 	
 	Object getMap();
 	
-	void die();
-	
-	Boolean win();
-	
+	void player1Die();
+
+	void player2Die();
 	
 }

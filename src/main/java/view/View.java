@@ -42,17 +42,17 @@ public class View implements IView, Runnable, KeyListener {
         this.setMap(map);
         
         this.setPlayer1(player1);
-        this.getPLayer1().getSprite().loadImage();
+        this.getPlayer1().getSprite().loadImage();
         
         this.setPlayer2(player2);
-        this.getPLayer2().getSprite().loadImage();
+        this.getPlayer1().getSprite().loadImage();
         
         this.setCloseView(new Rectangle(0, 0, squareNumberWidth, squareNumberHeight));
         SwingUtilities.invokeLater(this);
     }
 	
 
-	@Override
+	//@Override
     public final void run() {
         final BoardFrame boardFrame = new BoardFrame("Lorann");
         boardFrame.setDimension(new Dimension(squareNumberWidth, squareNumberHeight));
@@ -175,7 +175,7 @@ public class View implements IView, Runnable, KeyListener {
 	}
 	
 
-	@Override
+	//@Override
 	public void keyPressed(KeyEvent arg0) {
         try {
             this.getOrderPerformer().orderPerform(keyCodeToUserOrder(keyEvent.getKeyCode()));
@@ -184,26 +184,26 @@ public class View implements IView, Runnable, KeyListener {
         }
 	}
 
-	@Override
+	//@Override
 	public void keyReleased(KeyEvent arg0) {
 		// not used
 		
 	}
 
-	@Override
+	//@Override
 	public void keyTyped(KeyEvent arg0) {
 		// not used
 		
 	}
 
 
-	@Override
+	//@Override
 	public void displayMessage(String message) {
 		JOptionPane.showMessageDialog(null, message);
 		
 	}
 
-	@Override
+	//@Override
 	public void setOrderPerformer(IOrderPerformer orderPerformer) {
 		// TODO Auto-generated method stub
 		
