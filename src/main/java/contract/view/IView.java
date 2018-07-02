@@ -3,9 +3,16 @@ package contract.view;
 import contract.controller.IOrderPerformer;
 
 public interface IView {
-	
-	void displayMessage(String message);
-	
-	void setOrderPerformer(IOrderPerformer orderPerformer);
 
+    /**
+     * Display message.
+     *
+     * @param message
+     *            the message
+     */
+    void displayMessage(String message);
+
+
+
+	void setOrderPerformer(IOrderPerformer orderPeformer);
 }

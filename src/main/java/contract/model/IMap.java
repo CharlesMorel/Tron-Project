@@ -3,8 +3,7 @@ package contract.model;
 import java.util.Observable;
 
 public interface IMap {
-	
-	
+
     /**
      * Gets the width.
      *
@@ -41,5 +40,4 @@ public interface IMap {
      * @return the observable
      */
     Observable getObservable();
-	
 }

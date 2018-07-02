@@ -9,157 +9,148 @@ import contract.model.IModel;
 import contract.view.IView;
 
 public class Controller implements IController, IOrderPerformer {
-	
-    private static final int speed = 250;
-	
-	int i = 0;
-	int j = 0;
-	String dir = "right";
-	
-	private IView view;
 
-    private static IModel model;
-    
+    /** The Constant speed of the thread. */
+    private static final int speed = 150;
+
+    /** The view. */
+    private IView view;
+
+    /** The model. */
+    private IModel model;
+
+    /** The stack order. */
     private UserOrder stackOrder;
     
-    
-    public Controller(final IView view, final IModel model) {
-    	this.setView(view);
-    	this.setModel(model);
-    	this.clearStackOrder();
-    }
-    
+
 	
-    @Override
+    /**
+     * Instantiates a new Lorann controller.
+     *
+     * @param view
+     *            the view
+     * @param model
+     *            the model
+     */
+	public Controller(final IView view, final IModel model) {
+		this.setView(view);
+	    this.setModel(model);
+	    this.clearStackOrder();
+	}
+
+	/**
+	 * Drive the game, player movement and threading
+	 */
+	@Override
 	public void play() throws InterruptedException {
+		getModel().getPlayer1().alive();
 		
-		getModel().getPlayer1().player1Alive();
-		getModel().getPlayer2().player2Alive();
-		
-		while (!this.getModel().getPlayer1().player1Win() || !this.getModel().getPlayer2().player2Win()) {
-			Thread.sleep(speed);
-			// TODO : DO THIS METHOD BEFORE CONTINUE THE REST OF THE CONTROLLER CLASS
-			if(this.getModel().getPlayer1().player1IsAlive()) {
-				switch(this.getStackOrder()) {
-					case RIGHT:
-						this.getModel().getPlayer1().moveRight();
-						break;
-					
-					case LEFT:
-						this.getModel().getPlayer1().moveLeft();
-						break;
-					
-					case DOWN:
-						this.getModel().getPlayer1().moveDown();
-						break;
-					
-					case UP:
-						this.getModel().getPlayer1().moveUp();
-						break;
-						
-					case NOP:
-						this.getModel().getPlayer1().doNothing();
-				}
-				this.clearStackOrder();
-			}
-			
-			if(this.getModel().getPlayer2().player2IsAlive()) {
-				switch(this.getStackOrder()) {
-				case RIGHT:
-					this.getModel().getPlayer2().moveRight();
-					break;
-				
-				case LEFT:
-					this.getModel().getPlayer2().moveLeft();
-					break;
-				
-				case DOWN:
-					this.getModel().getPlayer2().moveDown();
-					break;
-				
-				case UP:
-					this.getModel().getPlayer2().moveUp();
-					break;
-					
-				case NOP:
-					this.getModel().getPlayer2().doNothing();
-				}
-				this.clearStackOrder();
-			}
-			
-		}
-		
-		if(!getModel().getPlayer1().player1IsAlive()) {
-			this.getView().displayMessage("Player 1 is dead... Victory for player 2!");
-		}
-		
-		if(!getModel().getPlayer2().player2IsAlive() && getModel().getPlayer1().player1IsAlive()) {
-			this.getView().displayMessage("Player 2 is dead... Victory for player1!");
-		}
-		
+		getModel().getPlayer2().alive();
+		while (this.getModel().getPlayer1().isAlive() && this.getModel().getPlayer2().isAlive()) {
+            Thread.sleep(speed);
+            switch (this.getStackOrder()) {
+                case RIGHT:
+                    this.getModel().getPlayer1().moveRight();
+                    //ADD PLAYER 2
+                    break;
+                case LEFT:
+                    this.getModel().getPlayer1().moveLeft();
+                    break;
+                case UP:
+                    this.getModel().getPlayer1().moveUp();
+                    break;
+                case DOWN:
+                    this.getModel().getPlayer1().moveDown();
+                    break;
+                case NOP:
+                	this.getModel().getPlayer1().doNothing();
+                	break;
+                    
+            }
+            this.clearStackOrder();
+
+        }
+        this.getView().displayMessage("You died");
 	}
 	
-	public Boolean player1IsFacingLightWall() {
-		return getModel().getPlayer1().getX() == getModel().getLightWall1().getX() && getModel().getPlayer1().getY() == getModel().getLightWall1().getY()
-			|| getModel().getPlayer1().getX() == getModel().getLightWall2().getX() && getModel().getPlayer1().getY() == getModel().getLightWall2().getY();
-	}
-	
-	public Boolean player2IsFacingLightWall() {
-		return getModel().getPlayer2().getX() == getModel().getLightWall1().getX() && getModel().getPlayer2().getY() == getModel().getLightWall1().getY()
-			|| getModel().getPlayer2().getX() == getModel().getLightWall2().getX() && getModel().getPlayer2().getY() == getModel().getLightWall2().getY();
-	}
-	
-	public void playerIsFacingSomething() {
-		if(this.player2IsFacingLightWall()) {
-			this.getModel().getPlayer2().player2Die();
-		}
-		if(this.player1IsFacingLightWall()) {
-			this.getModel().getPlayer1().player1Die();
-		}
-	}
-
-	@Override
-	public IOrderPerformer getOrderPeformer() {
-		return this;
-	}
-
-	@Override
-	public IModel getModel() {
-        return Controller.model;
-	}
-
+    /**
+     * Write the UserOrder in the stack of order (stackOrder)
+     */
 	@Override
 	public void orderPerform(UserOrder userOrder) throws IOException {
 		this.setStackOrder(userOrder);
-		
-	}
-
-
-	public IView getView() {
-		return view;
-	}
-
-
-	public void setView(IView view) {
-		this.view = view;
-	}
-
-
-	public static void setModel(IModel model) {
-		Controller.model = model;
-	}
-
-
-	private UserOrder getStackOrder() {
-		return stackOrder;
-	}
-
-
-	private void setStackOrder(UserOrder stackOrder) {
-		this.stackOrder = stackOrder;
 	}
 	
-	private void clearStackOrder() {
-		this.stackOrder = UserOrder.NOP;
-	}
+    /**
+     * Gets the view.
+     *
+     * @return the view
+     */
+    private IView getView() {
+        return this.view;
+    }
+    
+    /**
+     * Sets the view.
+     *
+     * @param view
+     *            the view to set
+     */
+    private void setView(final IView view) {
+        this.view = view;
+    }
+    
+    /**
+     * Gets the model.
+     *
+     * @return the model
+     */
+    private IModel getModel() {
+        return this.model;
+    }
+    
+    /**
+     * Sets the model.
+     *
+     * @param model
+     *            the model to set
+     */
+    private void setModel(final IModel model) {
+        this.model = model;
+    }
+    
+    /**
+     * Gets the stack order.
+     *
+     * @return the stack order
+     */
+    private UserOrder getStackOrder() {
+        return this.stackOrder;
+    }
+
+    /**
+     * Sets the stack order.
+     *
+     * @param stackOrder
+     *            the new stack order
+     */
+    private void setStackOrder(final UserOrder stackOrder) {
+        this.stackOrder = stackOrder;
+    }
+
+    /**
+     * Clear stack order.
+     */
+    private void clearStackOrder() {
+        this.stackOrder = UserOrder.NOP;
+    }
+
+   /**
+    * Get the order to perform
+    */
+    @Override
+    public IOrderPerformer getOrderPeformer() {
+        return this;
+    }
+
 }

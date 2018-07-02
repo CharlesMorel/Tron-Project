@@ -4,36 +4,39 @@ import java.awt.Point;
 
 import showboard.IPawn;
 
+
+
 public interface IMobile extends IPawn, IElement {
 
-	void moveRight();
-	
-	void moveLeft();
-	
-	void moveUp();
-	
-	void moveDown();
-	
-	void sameDirection();
-	
-	void doNothing();
+    /**
+     * Move up.
+     */
+    void moveUp();
+
+    /**
+     * Move left.
+     */
+    void moveLeft();
+
+    /**
+     * Move down.
+     */
+    void moveDown();
+
+    /**
+     * Move right.
+     */
+    void moveRight();
+
+
     
-    Boolean player1IsFacingLightWall();
-    
-    Boolean player2IsFacingLightWall();
-    
-    void playerIsFacingSomething();
-    
-	Boolean player1Win();
-	
-	Boolean player2Win();
-	
+
     /**
      * Gets the x.
      *
      * @return the x
      */
-	//@Override
+    @Override
     int getX();
 
     /**
@@ -41,47 +44,32 @@ public interface IMobile extends IPawn, IElement {
      *
      * @return the y
      */
-    //@Override
+    @Override
     int getY();
-    
+
     /**
      * Checks if is alive.
      *
      * @return the alive
      */
-    Boolean player1IsAlive();
-    
-    Boolean player2IsAlive();
-    
+    Boolean isAlive();
+
     /**
      * Checks if the car crashed.
      *
      * @return the boolean
      */
     Boolean isCrashed();
-    
+
+    /*
+     * (non-Javadoc)
+     * @see fr.exia.showboard.IPawn#getPosition()
+     */
+    @Override
     Point getPosition();
-    
-    void player1Alive();
-    
-    void player2Alive();
-    
-	void setY(final int y);
-	
-	void setX(final int x);
-	
-	int getStartxPlayer1();
 
-	int getStartyPlayer1();
-	
-	int getStartxPlayer2();
+	void alive();
 
-	int getStartyPlayer2();
-	
-	Object getMap();
-	
-	void player1Die();
+	void doNothing();
 
-	void player2Die();
-	
 }

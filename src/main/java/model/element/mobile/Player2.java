@@ -20,7 +20,7 @@ public class Player2 extends Mobile {
 
 	
     public Player2(final int x, final int y, final IMap map) throws IOException {
-        super(x, y, sprite, map, Permeability.KILL);
+        super(x, y, sprite, map, Permeability.BLOCKING);
         sprite.loadImage();
         spriteMoveLeft.loadImage();
         spriteMoveRight.loadImage();
@@ -60,7 +60,7 @@ public class Player2 extends Mobile {
         this.setSprite(sprite);
     }
 	
-	@Override
+	/*@Override
 	public Boolean player2IsFacingLightWall() {
 		// TODO Auto-generated method stub
 		return null;
@@ -70,5 +70,5 @@ public class Player2 extends Mobile {
 	public void playerIsFacingSomething() {
 		// TODO Auto-generated method stub
 		
-	}
+	}*/
 }

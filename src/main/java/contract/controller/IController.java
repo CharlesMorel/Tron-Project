@@ -1,7 +1,5 @@
 package contract.controller;
 
-import contract.model.IModel;
-
 public interface IController {
 
     /**
@@ -18,7 +16,5 @@ public interface IController {
      * @return the order peformer
      */
     IOrderPerformer getOrderPeformer();
-   
-    IModel getModel();
-    
+
 }

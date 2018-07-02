@@ -14,54 +14,71 @@ import contract.controller.IOrderPerformer;
 import contract.controller.UserOrder;
 import contract.model.IMap;
 import contract.model.IMobile;
-import contract.model.IModel;
 import contract.view.IView;
 import showboard.BoardFrame;
 
+
 public class View implements IView, Runnable, KeyListener {
-	
-	private static final int squareNumberWidth = 600;
-	
-	private static final int squareNumberHeight = 400;
-	
+
+    /** The Constant squareSize. */
+    private static final int squareNumberWidth = 60;
+    
+    /** The Constant squareSize. */
+    private static final int squareNumberHeight = 40;
+    
+    /** The Constant squareSize. */
     private static final int squareSize = 50;
-	
-	private Rectangle closeView;
-	
-	private IMap map;
-	
-	private IMobile player1;
-	
-	private IMobile player2;
-	
-	private IMobile lightWall1;
-	
-	private IMobile lightWall2;
-	
-    private IOrderPerformer orderPerformer;
-	
-	
-    public View(final IMap map, final IMobile player1, final IMobile player2, IModel Model) throws IOException {
-    	
+
+    /** The Constant closeView. */
+    private Rectangle        closeView;
+
+    /** The level. */
+    private IMap           map;
+
+    /** The lorann. */
+    private IMobile          player1;
+    
+    private IMobile          player2;
+
+    /** The order performer. */
+    private IOrderPerformer  orderPerformer;
+    
+   // /** The square of the window with a black background" */
+   // private Tile tile = new Tile("BlackTile.jpg");
+
+    /**
+     * Instantiates a new View.
+     * @param model 
+     * @param model 
+     *
+     * @param road
+     *            the road
+     * @param myVehicle
+     *            the my vehicle
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
+    public View(final IMap map, final IMobile player1, final IMobile player2) throws IOException {
         this.setMap(map);
-        
         this.setPlayer1(player1);
-        this.getPlayer1().getSprite().loadImage();
-        
         this.setPlayer2(player2);
+        this.getPlayer1().getSprite().loadImage();
         this.getPlayer2().getSprite().loadImage();
-        
-        this.setLightWall1(lightWall1);
-        this.getLightWall1().getSprite().loadImage();
-        
-        this.setLightWall2(lightWall2);
-        this.getLightWall2().getSprite().loadImage();
-        
         this.setCloseView(new Rectangle(0, 0, squareNumberWidth, squareNumberHeight));
         SwingUtilities.invokeLater(this);
     }
-	
 
+/**
+    * Display a message in a popup
+    */
+    @Override
+    public final void displayMessage(final String message) {
+        JOptionPane.showMessageDialog(null, message);
+    }
+
+   /**
+    * Thread that run the window
+    */
 	@Override
     public final void run() {
         final BoardFrame boardFrame = new BoardFrame("Tron");
@@ -73,30 +90,32 @@ public class View implements IView, Runnable, KeyListener {
         boardFrame.addKeyListener(this);
         boardFrame.setFocusable(true);
         boardFrame.setFocusTraversalKeysEnabled(false);
-        boardFrame.setLocationRelativeTo(null);
 
         for (int x = 0; x < squareNumberWidth; x++) {
             for (int y = 0; y < squareNumberHeight; y++) {
-                boardFrame.addSquare(this.map.getOnTheMapXY(x, y), x, y);
+                boardFrame.addSquare(this.map.getOnTheMapXY(x, y), x, y); //not sure (tile ?)
             }
         }
+        
         
         boardFrame.addPawn(this.getPlayer1());
         
         boardFrame.addPawn(this.getPlayer2());
-        
-        boardFrame.addPawn(this.getLightWall2());
-        
-        boardFrame.addPawn(this.getLightWall1());
 
         this.getMap().getObservable().addObserver(boardFrame.getObserver());
         
         boardFrame.setVisible(true);
     }
-	
-	
+
+    /**
+     * Key code to user order.
+     *
+     * @param keyCode
+     *            the key code
+     * @return the user order
+     */
     private static UserOrder keyCodeToUserOrder(final int keyCode) {
-        UserOrder userOrder = null;
+        UserOrder userOrder;
                 
         switch (keyCode) {
             case KeyEvent.VK_RIGHT:
@@ -107,140 +126,138 @@ public class View implements IView, Runnable, KeyListener {
             case KeyEvent.VK_Q:
                 userOrder = UserOrder.LEFT;
                 break;
-                
+            case KeyEvent.VK_UP:
+            case KeyEvent.VK_Z:
+                userOrder = UserOrder.UP;
+                break;
+            case KeyEvent.VK_DOWN:
+            case KeyEvent.VK_S:
+                userOrder = UserOrder.DOWN;
+                break;
+            default:
+                userOrder = UserOrder.NOP;
+                break;
         }
         return userOrder;
     }
-    
 
-	public Rectangle getCloseView() {
-		return this.closeView;
-	}
+    /**
+     * Not used
+     */
+    @Override
+    public void keyTyped(final KeyEvent keyEvent) {
+        // Not used
+    }
 
-
-
-	public void setCloseView(Rectangle closeView) {
-		this.closeView = closeView;
-	}
-
-
-
-	public IMap getMap() {
-		return map;
-	}
-
-	
-
-	public void setMap(IMap map) throws IOException {
-		this.map = map;
-		
-        for (int x = 0; x < View.squareNumberWidth; x++) {
-            for (int y = 0; y < View.squareNumberHeight; y++) {
-                this.getMap().getOnTheMapXY(x, y).getSprite().loadImage(); //not sure
-            }
-        }
-	}
-
-
-
-	private IMobile getPlayer1() {
-		return player1;
-	}
-
-
-
-	private void setPlayer1(IMobile player1) {
-		this.player1 = player1;
-	}
-
-
-
-	private IMobile getPlayer2() {
-		return player2;
-	}
-
-
-
-	private void setPlayer2(IMobile player2) {
-		this.player2 = player2;
-	}
-
-
-
-	public static int getSquarenumberwidth() {
-		return squareNumberWidth;
-	}
-
-
-
-	public static int getSquarenumberheight() {
-		return squareNumberHeight;
-	}
-
-
-
-	public static int getSquaresize() {
-		return squareSize;
-	}
-
-
-	public IOrderPerformer getOrderPerformer() {
-        return this.orderPerformer;
-	}
-	
-
-	@Override
-	public void keyPressed(KeyEvent keyEvent) {
+    /**
+     * Catch the user keyPressed and send it to the userOrderPerformer
+     */
+    @Override
+    public final void keyPressed(final KeyEvent keyEvent) {
         try {
             this.getOrderPerformer().orderPerform(keyCodeToUserOrder(keyEvent.getKeyCode()));
         } catch (final IOException exception) {
             exception.printStackTrace();
         }
-	}
+    }
 
-	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// not used
-		
-	}
+    /**
+     * Not used
+     */
+    @Override
+    public void keyReleased(final KeyEvent keyEvent) {
+        // Not used
+    }
 
-	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// not used
-		
-	}
+    /**
+     * Gets the level.
+     *
+     * @return the level
+     */
+    private IMap getMap() {
+        return this.map;
+    }
+
+    /**
+     * Sets the level.
+     *
+     * @param level
+     *            the new level
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
+    private void setMap(final IMap map) throws IOException {
+        this.map = map;
+        for (int x = 0; x < View.squareNumberWidth; x++) {
+            for (int y = 0; y < View.squareNumberHeight; y++) {
+                this.getMap().getOnTheMapXY(x, y).getSprite().loadImage(); //not sure
+            }
+        }
+    }
+
+    /**
+     * Gets my vehicle.
+     *
+     * @return my vehicle
+     */
+    private IMobile getPlayer1() {
+        return this.player1;
+    }
+    
+    private IMobile getPlayer2() {
+        return this.player2;
+    }
+
+    /**
+     * Sets my vehicle.
+     *
+     * @param myVehicle
+     *            my new vehicle
+     */
+    private void setPlayer1(final IMobile player1) {
+        this.player1 = player1;
+    }
+    
+    private void setPlayer2(final IMobile player2) {
+        this.player2 = player2;
+    }
 
 
-	@Override
-	public void displayMessage(String message) {
-		JOptionPane.showMessageDialog(null, message);
-		
-	}
+    /**
+     * Gets the close view.
+     *
+     * @return the close view
+     */
+    private Rectangle getCloseView() {
+        return this.closeView;
+    }
 
-	@Override
-	public void setOrderPerformer(IOrderPerformer orderPerformer) {
+    /**
+     * Sets the close view.
+     *
+     * @param closeView
+     *            the new close view
+     */
+    private void setCloseView(final Rectangle closeView) {
+        this.closeView = closeView;
+    }
+
+    /**
+     * Gets the order performer.
+     *
+     * @return the order performer
+     */
+    private IOrderPerformer getOrderPerformer() {
+        return this.orderPerformer;
+    }
+
+    /**
+     * Sets the order performer.
+     *
+     * @param orderPerformer
+     *            the new order performer
+     */
+    public final void setOrderPerformer(final IOrderPerformer orderPerformer) {
         this.orderPerformer = orderPerformer;
-		
-	}
-
-
-	public IMobile getLightWall1() {
-		return lightWall1;
-	}
-
-
-	public void setLightWall1(IMobile lightWall1) {
-		this.lightWall1 = lightWall1;
-	}
-
-
-	public IMobile getLightWall2() {
-		return lightWall2;
-	}
-
-
-	public void setLightWall2(IMobile lightWall2) {
-		this.lightWall2 = lightWall2;
-	}
-
+    }
 }
