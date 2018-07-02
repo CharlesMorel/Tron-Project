@@ -30,7 +30,7 @@ public class Controller implements IController, IOrderPerformer {
     }
     
 	
-    //@Override
+    @Override
 	public void play() throws InterruptedException {
 		
 		getModel().getPlayer1().player1Alive();
@@ -118,21 +118,19 @@ public class Controller implements IController, IOrderPerformer {
 		}
 	}
 
-	//@Override
+	@Override
 	public IOrderPerformer getOrderPeformer() {
-		// TODO Auto-generated method stub
-		return null;
+		return this;
 	}
 
-	//@Override
+	@Override
 	public IModel getModel() {
-		// TODO Auto-generated method stub
-		return null;
+        return Controller.model;
 	}
 
-	//@Override
+	@Override
 	public void orderPerform(UserOrder userOrder) throws IOException {
-		// TODO Auto-generated method stub
+		this.setStackOrder(userOrder);
 		
 	}
 

@@ -1,10 +1,13 @@
 package model;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import contract.model.IMap;
 import contract.model.IMobile;
 import contract.model.IModel;
 import model.element.mobile.LightWall1;
+import model.element.mobile.LightWall2;
 import model.element.mobile.Mobile;
 import model.element.mobile.Player1;
 import model.element.mobile.Player2;
@@ -21,8 +24,8 @@ public class Model implements IModel {
 	
 	private IMobile lightWall2;
 	
-	public Model(final String fileName) throws IOException {
-		/*Mobile.setStartXPlayer1(1);
+	public Model(final String fileName) throws IOException, SQLException {
+		Mobile.setStartXPlayer1(1);
 		Mobile.setStartYPlayer1(1);
 		
 		Mobile.setStartXPlayer2(5);
@@ -33,12 +36,12 @@ public class Model implements IModel {
 		
 		Mobile.setStartXLightWall2(5);
 		Mobile.setStartYLightWall2(5);
-		*/
+		
 		this.setMap(new Map(fileName));
 		this.setPlayer1(new Player1(Mobile.startXPlayer1, Mobile.startYPlayer1, this.getMap()));
 		this.setPlayer2(new Player2(Mobile.startXPlayer2, Mobile.startYPlayer2, this.getMap()));
-		/*this.setLightWall1(new LightWall1(Mobile.startXLightWall1, Mobile.startYLightWall1, this.getMap()));
-		this.setLightWall2(new LightWall1(Mobile.startXLightWall2, Mobile.startYLightWall2, this.getMap()));*/
+	    /*this.setLightWall1(new LightWall1(Mobile.startXLightWall1, Mobile.startYLightWall1, this.getMap()));
+		this.setLightWall2(new LightWall2(Mobile.startXLightWall2, Mobile.startYLightWall2, this.getMap()));*/
 	}
 
 	
@@ -47,50 +50,45 @@ public class Model implements IModel {
         this.map = map;
     }
 
-    //@Override
+    @Override
 	public IMap getMap() {
-		// TODO Auto-generated method stub
-		return null;
+        return this.map;
 	}
 	
     private void setPlayer1(final IMobile player1) {
         this.player1 = player1;
     }
 
-    //@Override
+    @Override
 	public IMobile getPlayer1() {
-		// TODO Auto-generated method stub
-		return null;
+		return player1;
 	}
 	
     private void setPlayer2(final IMobile player2) {
         this.player2 = player2;
     }
 
-    //@Override
+    @Override
 	public IMobile getPlayer2() {
-		// TODO Auto-generated method stub
-		return null;
+		return player2;
 	}
 	
     private void setLightWall1(IMobile lightWall1) {
 		this.lightWall1 = lightWall1;
 	}
 
-    //@Override
+    @Override
 	public IMobile getLightWall1() {
-		// TODO Auto-generated method stub
-		return null;
+		return lightWall1;
 	}
 
     private void setLightWall2(IMobile lightWall2) {
 		this.lightWall2 = lightWall2;
 	}
 	
-    //@Override
+    @Override
 	public IMobile getLightWall2() {
-		// TODO Auto-generated method stub
-		return null;
+		return lightWall2;
 	}
 
 }

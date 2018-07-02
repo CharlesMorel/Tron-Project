@@ -1,8 +1,10 @@
 package model;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.io.InputStreamReader;
 import java.util.Observable;
 
 import contract.model.IElement;
@@ -17,13 +19,9 @@ public class Map extends Observable implements IMap {
 	
 	private IElement[][] onTheMap;
 	
-    Map(final int MapFile) throws IOException {
+    Map(final String fileName) throws IOException, SQLException {
         super();
-        try {
-        	this.loadFile(MapFile);
-        } catch(SQLException e) {
-        	e.printStackTrace();
-        }
+        this.loadFile(fileName);
         
     }
     
@@ -54,7 +52,7 @@ public class Map extends Observable implements IMap {
 		return onTheMap;
 	}
 
-	public void setOnTheMapXY(IElement[][] element, final int x, final int y) {
+	public void setOnTheMapXY(IElement element, final int x, final int y) {
 		this.onTheMap[x][y] = element;
 	}
 
@@ -66,34 +64,31 @@ public class Map extends Observable implements IMap {
 		this.height = height;
 	}
 
-	//@Override
+    @Override
 	public int getWidth() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.width;
 	}
 
-	//@Override
+    @Override
 	public int getHeight() {
-		// TODO Auto-generated method stub
-		return 0;
+        return this.height;
 	}
 
-	//@Override
+    @Override
 	public IElement getOnTheMapXY(int x, int y) {
 		// TODO Auto-generated method stub
 		return this.onTheMap[x][y];
 	}
 
-	//@Override
+    @Override
 	public void setMobileHasChanged() {
-		// TODO Auto-generated method stub
-		
+        this.setChanged();
+        this.notifyObservers();
 	}
 
-	//@Override
+    @Override
 	public Observable getObservable() {
-		// TODO Auto-generated method stub
-		return null;
+        return this;
 	}
 
 }

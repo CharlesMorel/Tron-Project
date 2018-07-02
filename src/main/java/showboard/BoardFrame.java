@@ -49,19 +49,19 @@ public class BoardFrame extends JFrame implements IBoard {
     }
 
     
-    @Override
+    @Override    
     public final void addPawn(final IPawn pawn) {
         this.getBoardPanel().addPawn(pawn);
     }
 
     
-    @Override
+    @Override    
     public final Observer getObserver() {
         return (Observer) this.getBoardPanel();
     }
 
     
-    @Override
+    @Override    
     public final void setDimension(final Dimension dimension) {
         this.getBoardPanel().setDimension(dimension);
     }

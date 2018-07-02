@@ -18,6 +18,8 @@ public class Mobile extends Element implements IMobile {
 	protected Boolean player2Alive;
 	
 	private IMap map;
+
+	private IBoard board;
 	
 	protected static Boolean win = false;
 	
@@ -49,7 +51,7 @@ public class Mobile extends Element implements IMobile {
 		this.setY(y);
 	}
 	
-	//@Override
+    @Override
 	public void doNothing() {
 		this.setHasMoved();
 	}
@@ -58,7 +60,7 @@ public class Mobile extends Element implements IMobile {
 		this.getMap().setMobileHasChanged();
 	}
 	
-	//@Override
+    @Override
 	public int getX() {
 		return this.getPosition().x;
 	}
@@ -67,7 +69,7 @@ public class Mobile extends Element implements IMobile {
 		this.getPosition().x = x;
 	}
 	
-	//@Override
+    @Override
 	public int getY() {
 		return this.getPosition().y;
 	}
@@ -84,27 +86,27 @@ public class Mobile extends Element implements IMobile {
 		this.position = position;
 	}
 	
-	//@Override
+    @Override
     public Boolean player1IsAlive() {
         return this.player1Alive;
     }
     
-    //@Override
+    @Override
     public void player1Alive() {
     	this.player1Alive = true;
     }
     
-    //@Override
+    @Override
     public Boolean player2IsAlive() {
         return this.player2Alive;
     }
     
-    //@Override
+    @Override
     public void player2Alive() {
     	this.player2Alive = true;
     }
     
-    //@Override
+    @Override
     public Boolean isCrashed() {
         return this.getMap().getOnTheMapXY(this.getX(), this.getY()).getPermeability() == Permeability.BLOCKING;
     }
@@ -115,20 +117,20 @@ public class Mobile extends Element implements IMobile {
     }
     
 	public void player1Die(){
-		if(this.getX() == LightWall1.getX() && this.getY() == LightWall1.getPosition().y) {
+		/*if(this.getX() == LightWall1.getX() && this.getY() == LightWall1.getPosition().y) {
 			this.player1Alive = false;
 			this.setHasMoved();
-		}
+		}*/
 	}
 	
 	public void player2Die(){
-		if(this.getX() == LightWall2.getPosition().x && this.getY() == LightWall2.getPosition().y) {
+		/*if(this.getX() == LightWall2.getPosition().x && this.getY() == LightWall2.getPosition().y) {
 			this.player1Alive = false;
 			this.setHasMoved();
-		}
+		}*/
 	}
     
-	//@Override
+    @Override
 	public Boolean player1Win() {
 		//if (this.getX() == lightWall1 && this.getY() == StartyGate && DoorOpened == true) {
 		if(this.player2IsAlive() == false) {
@@ -136,8 +138,8 @@ public class Mobile extends Element implements IMobile {
 		}
 		return false;
 	}
-	
-	//@Override
+    
+    @Override
 	public Boolean player2Win() {
 		if (this.player1IsAlive() == false) {
 			return true;
@@ -206,55 +208,55 @@ public class Mobile extends Element implements IMobile {
 		Mobile.startYPlayer2 = startYPlayer2;
 	}
 
-	//@Override
+    @Override
 	public void moveRight() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	//@Override
+    @Override
 	public void moveLeft() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	//@Override
+    @Override
 	public void moveUp() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	//@Override
+    @Override
 	public void moveDown() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	//@Override
+    @Override
 	public void sameDirection() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	//@Override
+    @Override
 	public int getStartxPlayer1() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	//@Override
+    @Override
 	public int getStartyPlayer1() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	//@Override
+    @Override
 	public int getStartxPlayer2() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	//@Override
+    @Override
 	public int getStartyPlayer2() {
 		// TODO Auto-generated method stub
 		return 0;
@@ -292,24 +294,22 @@ public class Mobile extends Element implements IMobile {
 		Mobile.startYLightWall2 = startYLightWall2;
 	}
 
-	//@Override
+    @Override
 	public Boolean player1IsFacingLightWall() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	//@Override
+    @Override
 	public Boolean player2IsFacingLightWall() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	//@Override
+    @Override
 	public void playerIsFacingSomething() {
 		// TODO Auto-generated method stub
 		
 	}
-
-	
 
 }

@@ -1,3 +1,4 @@
+
 package model.elements;
 
 import java.awt.Image;
@@ -31,22 +32,19 @@ public class Element implements IElement {
 
 
 
-	//@Override
+    @Override
 	public ISprite getSprite() {
-		// TODO Auto-generated method stub
-		return null;
+        return (ISprite) this.sprite;
 	}
 
-	//@Override
+    @Override
 	public Permeability getPermeability() {
-		// TODO Auto-generated method stub
-		return null;
+        return this.permeability;
 	}
 
-	//@Override
+    @Override
 	public Image getImage() {
-		// TODO Auto-generated method stub
-		return null;
+        return this.getSprite().getImage();
 	}
 
 }

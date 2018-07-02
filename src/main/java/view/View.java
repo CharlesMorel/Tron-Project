@@ -34,6 +34,10 @@ public class View implements IView, Runnable, KeyListener {
 	
 	private IMobile player2;
 	
+	private IMobile lightWall1;
+	
+	private IMobile lightWall2;
+	
     private IOrderPerformer orderPerformer;
 	
 	
@@ -45,16 +49,22 @@ public class View implements IView, Runnable, KeyListener {
         this.getPlayer1().getSprite().loadImage();
         
         this.setPlayer2(player2);
-        this.getPlayer1().getSprite().loadImage();
+        this.getPlayer2().getSprite().loadImage();
+        
+        this.setLightWall1(lightWall1);
+        this.getLightWall1().getSprite().loadImage();
+        
+        this.setLightWall2(lightWall2);
+        this.getLightWall2().getSprite().loadImage();
         
         this.setCloseView(new Rectangle(0, 0, squareNumberWidth, squareNumberHeight));
         SwingUtilities.invokeLater(this);
     }
 	
 
-	//@Override
+	@Override
     public final void run() {
-        final BoardFrame boardFrame = new BoardFrame("Lorann");
+        final BoardFrame boardFrame = new BoardFrame("Tron");
         boardFrame.setDimension(new Dimension(squareNumberWidth, squareNumberHeight));
         boardFrame.setDisplayFrame(this.getCloseView());
         boardFrame.setSize(this.closeView.width * squareSize, this.closeView.height * squareSize);
@@ -74,6 +84,10 @@ public class View implements IView, Runnable, KeyListener {
         boardFrame.addPawn(this.getPlayer1());
         
         boardFrame.addPawn(this.getPlayer2());
+        
+        boardFrame.addPawn(this.getLightWall2());
+        
+        boardFrame.addPawn(this.getLightWall1());
 
         this.getMap().getObservable().addObserver(boardFrame.getObserver());
         
@@ -82,7 +96,7 @@ public class View implements IView, Runnable, KeyListener {
 	
 	
     private static UserOrder keyCodeToUserOrder(final int keyCode) {
-        UserOrder userOrder;
+        UserOrder userOrder = null;
                 
         switch (keyCode) {
             case KeyEvent.VK_RIGHT:
@@ -100,7 +114,7 @@ public class View implements IView, Runnable, KeyListener {
     
 
 	public Rectangle getCloseView() {
-		return closeView;
+		return this.closeView;
 	}
 
 
@@ -171,12 +185,12 @@ public class View implements IView, Runnable, KeyListener {
 
 
 	public IOrderPerformer getOrderPerformer() {
-		return orderPerformer;
+        return this.orderPerformer;
 	}
 	
 
-	//@Override
-	public void keyPressed(KeyEvent arg0) {
+	@Override
+	public void keyPressed(KeyEvent keyEvent) {
         try {
             this.getOrderPerformer().orderPerform(keyCodeToUserOrder(keyEvent.getKeyCode()));
         } catch (final IOException exception) {
@@ -184,29 +198,49 @@ public class View implements IView, Runnable, KeyListener {
         }
 	}
 
-	//@Override
+	@Override
 	public void keyReleased(KeyEvent arg0) {
 		// not used
 		
 	}
 
-	//@Override
+	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// not used
 		
 	}
 
 
-	//@Override
+	@Override
 	public void displayMessage(String message) {
 		JOptionPane.showMessageDialog(null, message);
 		
 	}
 
-	//@Override
+	@Override
 	public void setOrderPerformer(IOrderPerformer orderPerformer) {
-		// TODO Auto-generated method stub
+        this.orderPerformer = orderPerformer;
 		
+	}
+
+
+	public IMobile getLightWall1() {
+		return lightWall1;
+	}
+
+
+	public void setLightWall1(IMobile lightWall1) {
+		this.lightWall1 = lightWall1;
+	}
+
+
+	public IMobile getLightWall2() {
+		return lightWall2;
+	}
+
+
+	public void setLightWall2(IMobile lightWall2) {
+		this.lightWall2 = lightWall2;
 	}
 
 }
