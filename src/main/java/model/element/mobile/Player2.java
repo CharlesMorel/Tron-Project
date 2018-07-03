@@ -29,27 +29,26 @@ public class Player2 extends Mobile {
     }
     
     @Override
-    public final void moveLeft() {
+    public final void moveLeft() throws IOException {
         super.moveLeft();
         this.setSprite(spriteMoveLeft);
     }
     
     @Override
-    public final void moveRight() {
+    public final void moveRight() throws IOException {
         super.moveRight();
         this.setSprite(spriteMoveRight);
        
     }
     
     @Override
-    public final void moveUp() {
+    public final void moveUp() throws IOException {
         super.moveUp();
         this.setSprite(spriteMoveUp);
-
     }
     
     @Override
-    public final void moveDown() {
+    public final void moveDown() throws IOException {
         super.moveDown();
         this.setSprite(spriteMoveDown);
         

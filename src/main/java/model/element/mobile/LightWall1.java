@@ -20,7 +20,7 @@ public class LightWall1 extends Mobile{
      * @see fr.exia.insanevehicles.model.element.mobile.Mobile#moveLeft()
      */
     @Override
-    public final void moveLeft() {
+    public final void moveLeft() throws IOException {
         super.moveLeft();
         this.setSprite(sprite);
     }
@@ -30,7 +30,7 @@ public class LightWall1 extends Mobile{
      * @see fr.exia.insanevehicles.model.element.mobile.Mobile#moveRight()
      */
     @Override
-    public final void moveRight() {
+    public final void moveRight() throws IOException {
         super.moveRight();
         this.setSprite(sprite);
     }
@@ -40,7 +40,7 @@ public class LightWall1 extends Mobile{
      * @see fr.exia.insanevehicles.model.element.mobile.Mobile#moveLeft()
      */
     @Override
-    public final void moveUp() {
+    public final void moveUp() throws IOException {
         super.moveUp();
         this.setSprite(sprite);
     }
@@ -50,7 +50,7 @@ public class LightWall1 extends Mobile{
      * @see fr.exia.insanevehicles.model.element.mobile.Mobile#moveRight()
      */
     @Override
-    public final void moveDown() {
+    public final void moveDown() throws IOException {
         super.moveDown();
         this.setSprite(sprite);
     }

@@ -1,6 +1,8 @@
 package contract.model;
 
 import java.awt.Point;
+import java.io.IOException;
+
 import showboard.IPawn;
 
 
@@ -9,23 +11,27 @@ public interface IMobile extends IPawn, IElement {
 
     /**
      * Move up.
+     * @throws IOException 
      */
-    void moveUp();
+    void moveUp() throws IOException;
 
     /**
      * Move left.
+     * @throws IOException 
      */
-    void moveLeft();
+    void moveLeft() throws IOException;
 
     /**
      * Move down.
+     * @throws IOException 
      */
-    void moveDown();
+    void moveDown() throws IOException;
 
     /**
      * Move right.
+     * @throws IOException 
      */
-    void moveRight();
+    void moveRight() throws IOException;
 
 
     

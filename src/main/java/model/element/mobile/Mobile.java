@@ -1,6 +1,8 @@
 package model.element.mobile;
 
 import java.awt.Point;
+import java.io.IOException;
+
 import contract.model.IMap;
 import contract.model.IMobile;
 import contract.model.ISprite;
@@ -23,8 +25,9 @@ public abstract class Mobile extends Element implements IMobile {
 
     /** The board. */
     private IBoard  board;
-    
-    public static int StartXLightWall1;
+
+
+	public static int StartXLightWall1;
     
     public static int StartYLightWall1;
     
@@ -108,8 +111,9 @@ public abstract class Mobile extends Element implements IMobile {
      * @see fr.exia.insanevehicles.model.element.mobile.IMobile#moveUp()
      */
     @Override
-    public void moveUp() {
+    public void moveUp() throws IOException {
         this.setY(this.getY() - 1);
+        this.setLightWall1(new LightWall1(this.getPosition().x, this.getPosition().y, this.getMap()));
         this.setHasMoved();
     }
 
@@ -118,8 +122,9 @@ public abstract class Mobile extends Element implements IMobile {
      * @see fr.exia.insanevehicles.model.element.mobile.IMobile#moveLeft()
      */
     @Override
-    public void moveLeft() {
+    public void moveLeft() throws IOException {
         this.setX(this.getX() - 1);
+        this.setLightWall1(new LightWall1(this.getPosition().x, this.getPosition().y, this.getMap()));
         this.setHasMoved();
     }
 
@@ -128,8 +133,9 @@ public abstract class Mobile extends Element implements IMobile {
      * @see fr.exia.insanevehicles.model.element.mobile.IMobile#moveDown()
      */
     @Override
-    public void moveDown() {
+    public void moveDown() throws IOException {
         this.setY(this.getY() + 1);
+        this.setLightWall1(new LightWall1(this.getPosition().x, this.getPosition().y, this.getMap()));
         this.setHasMoved();
     }
 
@@ -138,10 +144,13 @@ public abstract class Mobile extends Element implements IMobile {
      * @see fr.exia.insanevehicles.model.element.mobile.IMobile#moveRight()
      */
     @Override
-    public void moveRight() {
+    public void moveRight() throws IOException {
         this.setX(this.getX() + 1);
+        this.setLightWall1(new LightWall1(this.getPosition().x, this.getPosition().y, this.getMap()));
         this.setHasMoved();
     }
+	public void setLightWall1(IMobile lightWall1) {
+	}
     /*
      * (non-Javadoc)
      * @see fr.exia.insanevehicles.model.element.mobile.IMobile#doNothing()

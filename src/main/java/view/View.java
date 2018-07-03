@@ -74,8 +74,7 @@ public class View implements IView, Runnable, KeyListener {
 	/**
      * Instantiates a new View.
 	 * @param iMobile 
-	 * @param lightWall2 
-     * @param model 
+	 * @param model 
      * @param model 
      *
      * @param road
@@ -85,16 +84,12 @@ public class View implements IView, Runnable, KeyListener {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public View(final IMap map, final IMobile player1, final IMobile player2, IMobile lightWall1, IMobile lightWall2) throws IOException {
+    public View(final IMap map, final IMobile player1, final IMobile player2) throws IOException {
         this.setMap(map);
         this.setPlayer1(player1);
         this.setPlayer2(player2);
         this.getPlayer1().getSprite().loadImage();
         this.getPlayer2().getSprite().loadImage();
-        this.setLightWall1(lightWall1);
-        this.getLightWall1().getSprite().loadImage();
-        this.setLightWall2(lightWall2);
-        this.getLightWall2().getSprite().loadImage();
         this.setCloseView(new Rectangle(0, 0, squareNumberWidth, squareNumberHeight));
         SwingUtilities.invokeLater(this);
     }
@@ -124,7 +119,7 @@ public class View implements IView, Runnable, KeyListener {
 
         for (int x = 0; x < squareNumberWidth; x++) {
             for (int y = 0; y < squareNumberHeight; y++) {
-                boardFrame.addSquare(this.map.getOnTheMapXY(x, y), x, y); //not sure (tile ?)
+                boardFrame.addSquare(this.map.getOnTheMapXY(x, y), x, y);
             }
         }
         
@@ -133,9 +128,9 @@ public class View implements IView, Runnable, KeyListener {
         
         boardFrame.addPawn(this.getPlayer2());
         
-        boardFrame.addPawn(this.getLightWall1());
+        /*boardFrame.addPawn(this.getLightWall1());
         
-        boardFrame.addPawn(this.getLightWall2());
+        boardFrame.addPawn(this.getLightWall2());*/
 
         this.getMap().getObservable().addObserver(boardFrame.getObserver());
         
