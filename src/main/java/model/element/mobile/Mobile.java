@@ -1,7 +1,6 @@
 package model.element.mobile;
 
 import java.awt.Point;
-
 import contract.model.IMap;
 import contract.model.IMobile;
 import contract.model.ISprite;
@@ -24,8 +23,51 @@ public abstract class Mobile extends Element implements IMobile {
 
     /** The board. */
     private IBoard  board;
+    
+    public static int StartXLightWall1;
+    
+    public static int StartYLightWall1;
+    
+    public static int StartXLightWall2;
+    
+    public static int StartYLightWall2;
+    
+    
+    
 
-    /**
+    public static int getStartXLightWall2() {
+		return StartXLightWall2;
+	}
+
+	public static void setStartXLightWall2(int startXLightWall2) {
+		StartXLightWall2 = startXLightWall2;
+	}
+
+	public static int getStartYLightWall2() {
+		return StartYLightWall2;
+	}
+
+	public static void setStartYLightWall2(int startYLightWall2) {
+		StartYLightWall2 = startYLightWall2;
+	}
+
+	public static int getStartYLightWall1() {
+		return StartYLightWall1;
+	}
+
+	public static void setStartYLightWall1(int startYLightWall1) {
+		StartYLightWall1 = startYLightWall1;
+	}
+
+	public static int getStartXLightWall1() {
+		return StartXLightWall1;
+	}
+
+	public static void setStartXLightWall1(int startXLightWall1) {
+		StartXLightWall1 = startXLightWall1;
+	}
+
+	/**
      * Instantiates a new mobile.
      *
      * @param sprite
@@ -100,7 +142,6 @@ public abstract class Mobile extends Element implements IMobile {
         this.setX(this.getX() + 1);
         this.setHasMoved();
     }
-
     /*
      * (non-Javadoc)
      * @see fr.exia.insanevehicles.model.element.mobile.IMobile#doNothing()
@@ -180,20 +221,13 @@ public abstract class Mobile extends Element implements IMobile {
         this.map = map;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see fr.exia.insanevehicles.model.element.mobile.IMobile#isAlive()
-     */
+    public void alive() {
+    	this.alive = true;
+    }
+    
     @Override
     public Boolean isAlive() {
         return this.alive;
-    }
-
-    /**
-     * Dies.
-     */
-    public void alive() {
-    	this.alive = true;
     }
     /**
      * Dies.
@@ -209,7 +243,7 @@ public abstract class Mobile extends Element implements IMobile {
      */
     @Override
     public Boolean isCrashed() {
-        return this.getMap().getOnTheMapXY(this.getX(), this.getY()).getPermeability() == Permeability.BLOCKING;
+    	return this.getMap().getOnTheMapXY(this.getX(), this.getY()).getPermeability() == Permeability.BLOCKING;
     }
 
     /*

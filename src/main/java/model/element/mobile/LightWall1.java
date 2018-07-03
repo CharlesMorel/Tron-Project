@@ -6,29 +6,15 @@ import contract.model.IMap;
 import contract.model.Permeability;
 import model.elements.Sprite;
 
+public class LightWall1 extends Mobile{
 
-public class Player1 extends Mobile{
+	private static final Sprite sprite = new Sprite('1', "lightwall1.png");
 	
-	private static final Sprite sprite = new Sprite('A', "motobleubas.png");
-	
-	private static final Sprite spriteMoveLeft = new Sprite('A', "motobleugauche.png");
-	
-	private static final Sprite spriteMoveRight = new Sprite('A', "motobleudroite.png");
-	
-	private static final Sprite spriteMoveUp = new Sprite('A', "motobleuhaut.png");
-	
-	private static final Sprite spriteMoveDown = new Sprite('A', "motobleubas.png");
-
-	
-    public Player1(final int x, final int y, final IMap map) throws IOException {
+    public LightWall1(final int x, final int y, final IMap map) throws IOException {
         super(x, y, sprite, map, Permeability.BLOCKING);
         sprite.loadImage();
-        spriteMoveLeft.loadImage();
-        spriteMoveRight.loadImage();
-        spriteMoveUp.loadImage();
-        spriteMoveDown.loadImage();
     }
-
+    
     /*
      * (non-Javadoc)
      * @see fr.exia.insanevehicles.model.element.mobile.Mobile#moveLeft()
@@ -36,7 +22,7 @@ public class Player1 extends Mobile{
     @Override
     public final void moveLeft() {
         super.moveLeft();
-        this.setSprite(spriteMoveLeft);
+        this.setSprite(sprite);
     }
 
     /*
@@ -46,7 +32,7 @@ public class Player1 extends Mobile{
     @Override
     public final void moveRight() {
         super.moveRight();
-        this.setSprite(spriteMoveRight);
+        this.setSprite(sprite);
     }
     
     /*
@@ -56,7 +42,7 @@ public class Player1 extends Mobile{
     @Override
     public final void moveUp() {
         super.moveUp();
-        this.setSprite(spriteMoveUp);
+        this.setSprite(sprite);
     }
 
     /*
@@ -66,6 +52,6 @@ public class Player1 extends Mobile{
     @Override
     public final void moveDown() {
         super.moveDown();
-        this.setSprite(spriteMoveDown);
+        this.setSprite(sprite);
     }
 }

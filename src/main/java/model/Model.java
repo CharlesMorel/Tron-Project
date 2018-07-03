@@ -7,6 +7,9 @@ import contract.model.IMobile;
 import contract.model.IModel;
 import model.element.mobile.Player1;
 import model.element.mobile.Player2;
+import model.element.mobile.LightWall1;
+import model.element.mobile.LightWall2;
+import model.element.mobile.Mobile;
 
 public class Model implements IModel {
 
@@ -17,6 +20,10 @@ public class Model implements IModel {
     private IMobile player1;
     
     private IMobile player2;
+    
+    private IMobile lightWall1;
+    
+    private IMobile lightWall2;
     
     /**
      * Instantiates a new model.
@@ -31,9 +38,23 @@ public class Model implements IModel {
         this.setMap(new Map(fileName));
         this.setPlayer1(new Player1(21, 6, this.getMap()));
         this.setPlayer2(new Player2(22, 10, this.getMap()));
+        Mobile.setStartXLightWall1(20);
+        Mobile.setStartYLightWall1(5);
+        Mobile.setStartXLightWall2(25);
+        Mobile.setStartYLightWall2(10);
+        this.setLightWall1(new LightWall1(Mobile.StartXLightWall1, Mobile.StartYLightWall1, this.getMap()));
+        this.setLightWall2(new LightWall2(Mobile.StartXLightWall2, Mobile.StartYLightWall2, this.getMap()));
     }
     
-    /**
+    
+    
+    public void setLightWall2(IMobile lightWall2) {
+		this.lightWall2 = lightWall2;
+	}
+
+
+
+	/**
      * get level
      * @return level
      */
@@ -82,4 +103,19 @@ public class Model implements IModel {
         this.player2 = player2;
     }
 
+    @Override
+	public IMobile getLightWall1() {
+		return lightWall1;
+	}
+
+	@Override
+	public IMobile getLightWall2() {
+		return lightWall2;
+	}
+	
+	public void setLightWall1(IMobile lightWall1) {
+		this.lightWall1 = lightWall1;
+	}
+
+    
 }

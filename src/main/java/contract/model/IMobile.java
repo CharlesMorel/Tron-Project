@@ -1,7 +1,6 @@
 package contract.model;
 
 import java.awt.Point;
-
 import showboard.IPawn;
 
 
@@ -46,6 +45,7 @@ public interface IMobile extends IPawn, IElement {
      */
     @Override
     int getY();
+
 
     /**
      * Checks if is alive.

@@ -11,7 +11,8 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import contract.controller.IOrderPerformer;
-import contract.controller.UserOrder;
+import contract.controller.UserOrder1;
+import contract.controller.UserOrder2;
 import contract.model.IMap;
 import contract.model.IMobile;
 import contract.view.IView;
@@ -27,27 +28,53 @@ public class View implements IView, Runnable, KeyListener {
     private static final int squareNumberHeight = 40;
     
     /** The Constant squareSize. */
-    private static final int squareSize = 50;
+    private static final int squareSize = 100;
 
     /** The Constant closeView. */
-    private Rectangle        closeView;
+    private Rectangle closeView;
 
     /** The level. */
-    private IMap           map;
+    private IMap map;
 
     /** The lorann. */
-    private IMobile          player1;
+    private IMobile player1;
     
-    private IMobile          player2;
+    private IMobile player2;
+    
+    private IMobile lightWall1;
+    
+    private IMobile lightWall2;
 
     /** The order performer. */
     private IOrderPerformer  orderPerformer;
     
+    
+    
+    
+    
    // /** The square of the window with a black background" */
    // private Tile tile = new Tile("BlackTile.jpg");
 
-    /**
+    public IMobile getLightWall2() {
+		return lightWall2;
+	}
+
+	public void setLightWall2(IMobile lightWall2) {
+		this.lightWall2 = lightWall2;
+	}
+
+	public IMobile getLightWall1() {
+		return lightWall1;
+	}
+
+	public void setLightWall1(IMobile lightWall1) {
+		this.lightWall1 = lightWall1;
+	}
+
+	/**
      * Instantiates a new View.
+	 * @param iMobile 
+	 * @param lightWall2 
      * @param model 
      * @param model 
      *
@@ -58,12 +85,16 @@ public class View implements IView, Runnable, KeyListener {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public View(final IMap map, final IMobile player1, final IMobile player2) throws IOException {
+    public View(final IMap map, final IMobile player1, final IMobile player2, IMobile lightWall1, IMobile lightWall2) throws IOException {
         this.setMap(map);
         this.setPlayer1(player1);
         this.setPlayer2(player2);
         this.getPlayer1().getSprite().loadImage();
         this.getPlayer2().getSprite().loadImage();
+        this.setLightWall1(lightWall1);
+        this.getLightWall1().getSprite().loadImage();
+        this.setLightWall2(lightWall2);
+        this.getLightWall2().getSprite().loadImage();
         this.setCloseView(new Rectangle(0, 0, squareNumberWidth, squareNumberHeight));
         SwingUtilities.invokeLater(this);
     }
@@ -101,6 +132,10 @@ public class View implements IView, Runnable, KeyListener {
         boardFrame.addPawn(this.getPlayer1());
         
         boardFrame.addPawn(this.getPlayer2());
+        
+        boardFrame.addPawn(this.getLightWall1());
+        
+        boardFrame.addPawn(this.getLightWall2());
 
         this.getMap().getObservable().addObserver(boardFrame.getObserver());
         
@@ -114,28 +149,39 @@ public class View implements IView, Runnable, KeyListener {
      *            the key code
      * @return the user order
      */
-    private static UserOrder keyCodeToUserOrder(final int keyCode) {
-        UserOrder userOrder;
+    private static UserOrder1 keyCodeToUserOrder1(final int keyCode) {
+        UserOrder1 userOrder;
+                
+        switch (keyCode) {
+            case KeyEvent.VK_D:
+            	userOrder = UserOrder1.RIGHT1;
+                break;
+                
+            case KeyEvent.VK_Q:
+                userOrder = UserOrder1.LEFT1;
+                break;
+                
+            default:
+                userOrder = UserOrder1.NOP1;
+                break;
+        }
+        return userOrder;
+    }
+    
+    private static UserOrder2 keyCodeToUserOrder2(final int keyCode) {
+        UserOrder2 userOrder;
                 
         switch (keyCode) {
             case KeyEvent.VK_RIGHT:
-            case KeyEvent.VK_D:
-            	userOrder = UserOrder.RIGHT;
+                userOrder = UserOrder2.RIGHT2;
                 break;
+                
             case KeyEvent.VK_LEFT:
-            case KeyEvent.VK_Q:
-                userOrder = UserOrder.LEFT;
+                userOrder = UserOrder2.LEFT2;
                 break;
-            case KeyEvent.VK_UP:
-            case KeyEvent.VK_Z:
-                userOrder = UserOrder.UP;
-                break;
-            case KeyEvent.VK_DOWN:
-            case KeyEvent.VK_S:
-                userOrder = UserOrder.DOWN;
-                break;
+                
             default:
-                userOrder = UserOrder.NOP;
+                userOrder = UserOrder2.NOP2;
                 break;
         }
         return userOrder;
@@ -155,7 +201,12 @@ public class View implements IView, Runnable, KeyListener {
     @Override
     public final void keyPressed(final KeyEvent keyEvent) {
         try {
-            this.getOrderPerformer().orderPerform(keyCodeToUserOrder(keyEvent.getKeyCode()));
+            this.getOrderPerformer().orderPerform1(keyCodeToUserOrder1(keyEvent.getKeyCode()));
+        } catch (final IOException exception) {
+            exception.printStackTrace();
+        }
+        try {
+            this.getOrderPerformer().orderPerform2(keyCodeToUserOrder2(keyEvent.getKeyCode()));
         } catch (final IOException exception) {
             exception.printStackTrace();
         }

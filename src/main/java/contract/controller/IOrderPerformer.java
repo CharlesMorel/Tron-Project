@@ -14,5 +14,7 @@ public interface IOrderPerformer {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    void orderPerform(UserOrder userOrder) throws IOException;
+    void orderPerform1(UserOrder1 userOrder1) throws IOException;
+    
+    void orderPerform2(UserOrder2 userOrder2) throws IOException;
 }

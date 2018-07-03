@@ -59,16 +59,4 @@ public class Player2 extends Mobile {
         super.doNothing();
         this.setSprite(sprite);
     }
-	
-	/*@Override
-	public Boolean player2IsFacingLightWall() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	@Override
-	public void playerIsFacingSomething() {
-		// TODO Auto-generated method stub
-		
-	}*/
 }

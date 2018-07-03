@@ -10,15 +10,19 @@ public class BoardFrame extends JFrame implements IBoard {
 	
 	private static final long serialVersionUID = -1561359738513452134L;
 	
-	private static final int defaultFrameSize = 600;
+	private static final int width = 600;
+	
+	private static final int height = 400;
 	
 	private final BoardPanel  boardPanel;
 	
+	
     public BoardFrame(final String title, final Boolean decorated) {
         super();
+
         this.setTitle(title);
-        this.setSize(defaultFrameSize, defaultFrameSize);
-        this.setLocationRelativeTo(null);
+        this.setSize(width, height);
+        //this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setUndecorated(decorated);
         this.boardPanel = new BoardPanel();

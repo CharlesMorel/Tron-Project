@@ -1,19 +1,19 @@
 package contract.controller;
 
-public enum UserOrder {
+public enum UserOrder1 {
    
 	/** The right. */
-    RIGHT,
+    RIGHT1,
 
     /** The left. */
-    LEFT,
+    LEFT1,
     
 	/** The up. */
-    UP,
+    UP1,
 
     /** The down. */
-    DOWN,
+    DOWN1,
 
     /** The nop. */
-    NOP
+    NOP1
 }
