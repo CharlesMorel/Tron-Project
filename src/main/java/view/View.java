@@ -21,22 +21,17 @@ import showboard.BoardFrame;
 
 public class View implements IView, Runnable, KeyListener {
 
-    /** The Constant squareSize. */
     private static final int squareNumberWidth = 60;
-    
-    /** The Constant squareSize. */
+
     private static final int squareNumberHeight = 40;
-    
-    /** The Constant squareSize. */
+
     private static final int squareSize = 100;
 
-    /** The Constant closeView. */
     private Rectangle closeView;
 
-    /** The level. */
     private IMap map;
 
-    /** The lorann. */
+
     private IMobile player1;
     
     private IMobile player2;
@@ -45,15 +40,9 @@ public class View implements IView, Runnable, KeyListener {
     
     private IMobile lightWall2;
 
-    /** The order performer. */
+
     private IOrderPerformer  orderPerformer;
     
-    
-    
-    
-    
-   // /** The square of the window with a black background" */
-   // private Tile tile = new Tile("BlackTile.jpg");
 
     public IMobile getLightWall2() {
 		return lightWall2;
@@ -71,19 +60,6 @@ public class View implements IView, Runnable, KeyListener {
 		this.lightWall1 = lightWall1;
 	}
 
-	/**
-     * Instantiates a new View.
-	 * @param iMobile 
-	 * @param model 
-     * @param model 
-     *
-     * @param road
-     *            the road
-     * @param myVehicle
-     *            the my vehicle
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
     public View(final IMap map, final IMobile player1, final IMobile player2) throws IOException {
         this.setMap(map);
         this.setPlayer1(player1);
@@ -94,17 +70,11 @@ public class View implements IView, Runnable, KeyListener {
         SwingUtilities.invokeLater(this);
     }
 
-/**
-    * Display a message in a popup
-    */
     @Override
     public final void displayMessage(final String message) {
         JOptionPane.showMessageDialog(null, message);
     }
 
-   /**
-    * Thread that run the window
-    */
 	@Override
     public final void run() {
         final BoardFrame boardFrame = new BoardFrame("Tron");
@@ -137,13 +107,6 @@ public class View implements IView, Runnable, KeyListener {
         boardFrame.setVisible(true);
     }
 
-    /**
-     * Key code to user order.
-     *
-     * @param keyCode
-     *            the key code
-     * @return the user order
-     */
     private static UserOrder1 keyCodeToUserOrder1(final int keyCode) {
         UserOrder1 userOrder;
                 
@@ -182,17 +145,11 @@ public class View implements IView, Runnable, KeyListener {
         return userOrder;
     }
 
-    /**
-     * Not used
-     */
     @Override
     public void keyTyped(final KeyEvent keyEvent) {
         // Not used
     }
 
-    /**
-     * Catch the user keyPressed and send it to the userOrderPerformer
-     */
     @Override
     public final void keyPressed(final KeyEvent keyEvent) {
         try {
@@ -207,31 +164,15 @@ public class View implements IView, Runnable, KeyListener {
         }
     }
 
-    /**
-     * Not used
-     */
     @Override
     public void keyReleased(final KeyEvent keyEvent) {
         // Not used
     }
 
-    /**
-     * Gets the level.
-     *
-     * @return the level
-     */
     private IMap getMap() {
         return this.map;
     }
 
-    /**
-     * Sets the level.
-     *
-     * @param level
-     *            the new level
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
     private void setMap(final IMap map) throws IOException {
         this.map = map;
         for (int x = 0; x < View.squareNumberWidth; x++) {
@@ -241,11 +182,6 @@ public class View implements IView, Runnable, KeyListener {
         }
     }
 
-    /**
-     * Gets my vehicle.
-     *
-     * @return my vehicle
-     */
     private IMobile getPlayer1() {
         return this.player1;
     }
@@ -254,12 +190,7 @@ public class View implements IView, Runnable, KeyListener {
         return this.player2;
     }
 
-    /**
-     * Sets my vehicle.
-     *
-     * @param myVehicle
-     *            my new vehicle
-     */
+
     private void setPlayer1(final IMobile player1) {
         this.player1 = player1;
     }
@@ -269,40 +200,18 @@ public class View implements IView, Runnable, KeyListener {
     }
 
 
-    /**
-     * Gets the close view.
-     *
-     * @return the close view
-     */
     private Rectangle getCloseView() {
         return this.closeView;
     }
 
-    /**
-     * Sets the close view.
-     *
-     * @param closeView
-     *            the new close view
-     */
     private void setCloseView(final Rectangle closeView) {
         this.closeView = closeView;
     }
 
-    /**
-     * Gets the order performer.
-     *
-     * @return the order performer
-     */
     private IOrderPerformer getOrderPerformer() {
         return this.orderPerformer;
     }
 
-    /**
-     * Sets the order performer.
-     *
-     * @param orderPerformer
-     *            the new order performer
-     */
     public final void setOrderPerformer(final IOrderPerformer orderPerformer) {
         this.orderPerformer = orderPerformer;
     }

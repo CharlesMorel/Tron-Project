@@ -149,40 +149,18 @@ public class BoardPanel extends JPanel implements Observer {
         return this.widthLooped;
     }
 
-    /**
-     * Sets the width looped.
-     *
-     * @param widthLooped
-     *            the new width looped
-     */
     public void setWidthLooped(final Boolean widthLooped) {
         this.widthLooped = widthLooped;
     }
 
-    /**
-     * Checks if is height looped.
-     *
-     * @return the boolean
-     */
     public Boolean isHeightLooped() {
         return this.heightLooped;
     }
 
-    /**
-     * Sets the height looped.
-     *
-     * @param heightLooped
-     *            the new height looped
-     */
     public void setHeightLooped(final Boolean heightLooped) {
         this.heightLooped = heightLooped;
     }
 
-    /**
-     * Creates the map pawn.
-     *
-     * @return the map
-     */
     private Map<String, ArrayList<IPawn>> createMapPawn() {
         final Map<String, ArrayList<IPawn>> mapPawn = new HashMap<>();
         String key;
@@ -199,29 +177,10 @@ public class BoardPanel extends JPanel implements Observer {
         return mapPawn;
     }
 
-    /**
-     * Creates the map pawn key.
-     *
-     * @param x
-     *            the x
-     * @param y
-     *            the y
-     * @return the string
-     */
     private String createMapPawnKey(final int x, final int y) {
         return x + ":" + y;
     }
 
-    /**
-     * Draw square XY.
-     *
-     * @param graphics
-     *            the graphics
-     * @param x
-     *            the x
-     * @param y
-     *            the y
-     */
     private void drawSquareXY(final Graphics graphics, final int x, final int y) {
         Image image;
         image = this.getImageXY(x, y, this.getWidthLimit(), this.getHeightLimit());
@@ -231,18 +190,6 @@ public class BoardPanel extends JPanel implements Observer {
 
     }
 
-    /**
-     * Draw pawns XY.
-     *
-     * @param graphics
-     *            the graphics
-     * @param mapPawn
-     *            the map pawn
-     * @param x
-     *            the x
-     * @param y
-     *            the y
-     */
     private void drawPawnsXY(final Graphics graphics, final Map<String, ArrayList<IPawn>> mapPawn, final int x,
             final int y) {
         final List<IPawn> listPawn = mapPawn.get(this.createMapPawnKey(this.calculateRealX(x), this.calculateRealY(y)));
@@ -255,74 +202,34 @@ public class BoardPanel extends JPanel implements Observer {
         }
     }
 
-    /**
-     * Gets the width limit.
-     *
-     * @return the width limit
-     */
     private int getWidthLimit() {
         return Math.min(this.getDisplayFrame().width + this.getDisplayFrame().x, this.getDimension().width);
     }
 
-    /**
-     * Gets the height limit.
-     *
-     * @return the height limit
-     */
     private int getHeightLimit() {
         return Math.min(this.getDisplayFrame().height + this.getDisplayFrame().y, this.getDimension().height);
     }
 
-    /**
-     * Gets the corner min X.
-     *
-     * @return the corner min X
-     */
     private int getCornerMinX() {
         return this.getDisplayFrame().x;
     }
 
-    /**
-     * Gets the corner max X.
-     *
-     * @return the corner max X
-     */
     private int getCornerMaxX() {
         return this.getDisplayFrame().x + this.getDisplayFrame().width;
     }
 
-    /**
-     * Gets the corner min Y.
-     *
-     * @return the corner min Y
-     */
     private int getCornerMinY() {
         return this.getDisplayFrame().y;
     }
 
-    /**
-     * Gets the corner max Y.
-     *
-     * @return the corner max Y
-     */
     private int getCornerMaxY() {
         return this.getDisplayFrame().y + this.getDisplayFrame().height;
     }
 
-    /**
-     * Gets the square size width.
-     *
-     * @return the square size width
-     */
     private int getSquareSizeWidth() {
         return this.getWidth() / this.getDisplayFrame().width;
     }
 
-    /**
-     * Gets the square size height.
-     *
-     * @return the square size height
-     */
     private int getSquareSizeHeight() {
         return this.getHeight() / this.getDisplayFrame().height;
     }
